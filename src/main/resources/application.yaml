@@ -1,0 +1,27 @@
+# Nombre de la aplicacion
+spring:
+  application:
+    name: catalogo
+
+  # Consola web local para inspeccionar la base de datos H2 mientras la aplicación corre.
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # H2 en memoria permite ejecutar y evaluar el proyecto sin instalar un servidor de base de datos.
+  # NON_KEYWORDS=YEAR permite usar el nombre de columna.
+  datasource:
+    url: jdbc:h2:mem:catalogo_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=YEAR
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # create reconstruye el esquema en cada arranque; los datos H2 en memoria son temporales.
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
