@@ -1,12 +1,14 @@
 package com.catalogo.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+import com.catalogo.model.Movie;
 import com.catalogo.repository.MovieRepository;
 
-@Controller
+@RestController
 public class HomeController {
 
     private final MovieRepository movieRepository;
@@ -15,14 +17,9 @@ public class HomeController {
         this.movieRepository = movieRepository;
     }
 
-    /**
-     * Peticion principal para renderizar la vista del catalogo.
-     * Equivale a la ruta web inicial del framework.
-     */
+    /** Devuelve el catálogo en JSON desde la ruta principal. */
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("tituloPrincipal", "Catálogo de películas");
-        model.addAttribute("peliculas", movieRepository.findAll());
-        return "index";
+    public List<Movie> index() {
+        return movieRepository.findAll();
     }
 }

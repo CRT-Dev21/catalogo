@@ -36,12 +36,12 @@ Abre PowerShell en la carpeta del proyecto `./catalogo` y ejecuta:
 .\gradlew.bat bootRun
 ```
 
-La primera ejecución puede tardar un poco mientras Gradle descarga dependencias. Cuando aparezca el mensaje de que Tomcat inició en el puerto 8080, abre <http://localhost:8080/>.
-La página consulta la base de datos y muestra los diez registros. Para detener el servidor, vuelve a la terminal donde ejecutaste el comando `.\gradlew.bat bootRun` y presiona `Ctrl+C`.
+La primera ejecución puede tardar un poco mientras Gradle descarga dependencias. Cuando aparezca el mensaje de que Tomcat inició en el puerto 8080, consulta <http://localhost:8080/api/movies> para recibir el catálogo como JSON.
+La ruta principal (`/`) también devuelve la lista de películas como JSON. Para detener el servidor, vuelve a la terminal donde ejecutaste el comando `.\gradlew.bat bootRun` y presiona `Ctrl+C`.
 
 ## Revisar los datos
 
-Al iniciar la aplicación, la clase `MovieSeeder` agrega diez registros a `movies`. Puede revisar título, sinopsis, año y portada en la tabla de la página principal. La columna `cover` contiene direcciones de ejemplo.
+Al iniciar la aplicación, la clase `MovieSeeder` agrega diez registros a `movies`. Puedes revisar título, sinopsis, año y portada consultando <http://localhost:8080/api/movies>. La columna `cover` contiene direcciones de ejemplo.
 
 ### Consultar la base de datos en memoria (H2) directamente
 
@@ -76,7 +76,7 @@ Al cerrar el proceso, la base de datos **H2 se borra automáticamente**, y en el
 - `Movie.java` es el modelo/entidad y define los campos persistidos en la tabla `movies`.
 - Hibernate crea el esquema al arrancar, cambiar de base de datos es tan facil como cambiar la dependencia y la configuracion.
 - `MovieSeeder.java` construye y guarda los diez objetos mediante el repositorio de Spring Data JPA.
-- `MovieRepository.java` ofrece las operaciones de base de datos, y `HomeController` obtiene los registros que presenta la vista.
+- `MovieRepository.java` ofrece las operaciones de base de datos, y `MovieRestController` expone el catálogo como JSON en `/api/movies`.
 
 ## Usar otra base de datos
 
