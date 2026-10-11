@@ -46,6 +46,14 @@ public class Movie {
         this.cover = cover;
     }
 
+    /** Reemplaza los campos editables de la película sin cambiar su ID. */
+    public void updateDetails(String title, String synopsis, Integer year, String cover) {
+        this.title = title;
+        this.synopsis = synopsis;
+        this.year = year;
+        this.cover = cover;
+    }
+
     public Long getId() {
         return id;
     }
